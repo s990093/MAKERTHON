@@ -19,7 +19,7 @@
 2. 啟動虛擬環境：
 
    ```bash
-   source venv/bin/activate
+   source .venv/bin/activate
    ```
 
 3. 安裝相依套件：
@@ -46,5 +46,3 @@
 ## Arduino
 
 在 MAKERTHON 中，我們使用 Arduino 來處理硬體相關的任務。這可能涉及傳感器讀取、控制外部設備等。請參考 `arduino` 目錄中的相應文檔以進行配置和開發。
-
----
