@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.conf import settings
 from django.shortcuts import render
 import requests
@@ -50,14 +51,27 @@ class ControlSettingsAPIView(APIView):
 class LocalWeatherAPIView(APIView):
     def get(self, request):
         serializer = LocalWeatherSerializer(
-            LocalWeather.objects.get(city="南投縣"))
+            LocalWeather.objects.filter(city="南投縣"), many=True)
 
         return Response(serializer.data)
 
-    def put(self, request):
-        serializer = LocalWeatherSerializer(
-            LocalWeather, data=request.data, partial=True)
+    def post(self, request):
+        # 生成當前時間
+        current_time = datetime.now()
+
+        # 在 serializer 外部添加固定值
+        fixed_data = {
+            "time": current_time,
+            "city": "南投縣",
+        }
+
+        # 將生成的時間和固定值合併到 request.data 中
+        request.data.update(fixed_data)
+
+        # 使用 serializer
+        serializer = LocalWeatherSerializer(data=request.data, partial=True)
+
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

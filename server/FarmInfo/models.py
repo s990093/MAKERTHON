@@ -5,7 +5,7 @@ class BaseWeather(models.Model):
     humd = models.FloatField(verbose_name='相對濕度', null=True)
     temp = models.FloatField(verbose_name='溫度', null=True)
     elev = models.FloatField(verbose_name='高度', null=True)
-    time = models.CharField(max_length=50, verbose_name='資料觀測時間', unique=True)
+    time = models.DateTimeField(verbose_name='資料觀測時間', unique=True)
     pres = models.FloatField(verbose_name='測站氣壓', null=True)
     city = models.CharField(max_length=50, verbose_name='縣市')
 

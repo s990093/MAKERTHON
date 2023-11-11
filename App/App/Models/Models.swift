@@ -32,20 +32,16 @@ struct ResponseModel: Decodable {
     var local: [LocalWeather]
 }
 
-struct ControlSettings: Identifiable {
-    var id: UUID = UUID()
+struct ControlSettings:Decodable ,  Identifiable {
+    var id: Int
     var city: String
-    var controlValve: Bool
-    var autoDetect: Bool
-
-    var displayName: String {
-        return "\(city) - Control Valve: \(controlValve), Auto Detect: \(autoDetect)"
-    }
+    var control_valve: Bool
+    var auto_detect: Bool
 }
 
 
 struct Weather: Identifiable {
-    var id: UUID = UUID()
+    var id: Int
     var city: String
     var thisMonthRainfallLevel: Int
     var thisMonthTemperatureLevel: Int

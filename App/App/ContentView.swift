@@ -10,18 +10,18 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            
-            MonitoringView()
-                .tabItem {
-                    Image(systemName: "eye")
-                    Text("監控")
-                }
             SettingView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("設定")
                 }
 
+            MonitoringView()
+                .tabItem {
+                    Image(systemName: "eye")
+                    Text("監控")
+                }
+          
          
             
             AnalysisView()
