@@ -10,7 +10,7 @@ class BaseWeather(models.Model):
     city = models.CharField(max_length=50, verbose_name='縣市')
 
     def __str__(self):
-        return f"{self.CITY} - {self.TIME}"
+        return f"{self.city} - {self.time}"
 
     class Meta:
         abstract = True  # 讓這個模型成為抽象基類

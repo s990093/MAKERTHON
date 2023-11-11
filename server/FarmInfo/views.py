@@ -3,8 +3,8 @@ from django.conf import settings
 from django.shortcuts import render
 import requests
 
-from FarmInfo.models import ControlSettings, LocalWeather, WeatherObservation
-from FarmInfo.serializers import ControlSettingsSerializer, LocalWeatherSerializer, WeatherObservationSerializer
+from FarmInfo.models import ControlSettings, LocalWeather, Weather, WeatherObservation
+from FarmInfo.serializers import ControlSettingsSerializer, LocalWeatherSerializer, WeatherObservationSerializer, WeatherSerializer
 
 
 # rest_framework
@@ -40,12 +40,22 @@ class ControlSettingsAPIView(APIView):
         return Response(serializer.data)
 
     def put(self, request):
+        instance = ControlSettings.objects.get(city="南投縣")  # 假设你根据某些条件获取实例
+
         serializer = ControlSettingsSerializer(
-            ControlSettings, data=request.data, partial=True)
+            instance, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WeathersAPIView(APIView):
+    def get(self, request):
+        serializer = WeatherSerializer(
+            Weather.objects.get(city="南投縣"))
+
+        return Response(serializer.data)
 
 
 class LocalWeatherAPIView(APIView):

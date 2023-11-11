@@ -10,6 +10,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
+            
+            AnalysisView()
+                .tabItem {
+                    Image(systemName: "chart.bar")
+                    Text("分析")
+                }
             SettingView()
                 .tabItem {
                     Image(systemName: "gear")
@@ -24,11 +30,7 @@ struct ContentView: View {
           
          
             
-            AnalysisView()
-                .tabItem {
-                    Image(systemName: "chart.bar")
-                    Text("分析")
-                }
+          
         }
     }
 }

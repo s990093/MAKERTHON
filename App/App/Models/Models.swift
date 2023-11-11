@@ -37,20 +37,23 @@ struct ControlSettings:Decodable ,  Identifiable {
     var city: String
     var control_valve: Bool
     var auto_detect: Bool
+    
+    init(id: Int, city: String) {
+            self.id = id
+            self.city = city
+            self.control_valve = false
+            self.auto_detect = false
+        }
 }
 
 
-struct Weather: Identifiable {
+struct Weather: Decodable , Identifiable {
     var id: Int
     var city: String
-    var thisMonthRainfallLevel: Int
-    var thisMonthTemperatureLevel: Int
-    var threeMonthsRainfallLevel: Int
-    var threeMonthsTemperatureLevel: Int
-    var oneYearRainfallLevel: Int
-    var oneYearTemperatureLevel: Int
-
-    var displayName: String {
-        return "\(city)"
-    }
+    var this_month_rainfall_level: Int
+    var this_month_temperature_level: Int
+    var three_months_rainfall_level: Int
+    var three_months_temperature_level: Int
+    var one_year_rainfall_level: Int
+    var one_year_temperature_level: Int
 }
