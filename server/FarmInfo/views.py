@@ -45,3 +45,19 @@ class ControlSettingsAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LocalWeatherAPIView(APIView):
+    def get(self, request):
+        serializer = LocalWeatherSerializer(
+            LocalWeather.objects.get(city="南投縣"))
+
+        return Response(serializer.data)
+
+    def put(self, request):
+        serializer = LocalWeatherSerializer(
+            LocalWeather, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

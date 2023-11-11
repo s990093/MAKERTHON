@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    // MARK: asdad
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            
+            MonitoringView()
+                .tabItem {
+                    Image(systemName: "eye")
+                    Text("監控")
+                }
+            SettingView()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("設定")
+                }
+
+         
+            
+            AnalysisView()
+                .tabItem {
+                    Image(systemName: "chart.bar")
+                    Text("分析")
+                }
         }
-        .padding()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -6,22 +6,26 @@ from FarmInfo.models import ControlSettings, Weather, WeatherObservation, LocalW
 class WeatherObservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeatherObservation
-        exclude = ['id']
+        fields = '__all__'
+        # exclude = ['id']
 
 
 class LocalWeatherSerializer(serializers.ModelSerializer):
     class Meta:
         model = LocalWeather
-        exclude = ['id']
+        fields = '__all__'
+        # exclude = ['id']
 
 
 class ControlSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ControlSettings
-        exclude = ['id']
+        fields = '__all__'
+        # exclude = ['id']
 
 
 class WeatherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Weather
+        fields = '__all__'
         exclude = ['id']
