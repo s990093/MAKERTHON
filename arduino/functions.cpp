@@ -1,11 +1,7 @@
 #include "functions.h"
 #include <Arduino.h>
 
-/**
- * XSLT_REGISTER_FUNCTION_LOOKUP:
- *
- * Registering macro, not general purpose at all but used in different modules.
- */
+/// @brief
 void setupFunctions()
 {
     // 在這裡執行初始化任務
@@ -13,6 +9,7 @@ void setupFunctions()
     // 其他初始化...
 }
 
+/// @brief
 void performTask()
 {
     // 在這裡執行您的任務

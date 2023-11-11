@@ -1,5 +1,6 @@
 #include "functions.h"
 
+/// @brief
 void setup()
 {
 
@@ -8,6 +9,7 @@ void setup()
     setupFunctions();
 }
 
+/// @brief
 void loop()
 {
     performTask();

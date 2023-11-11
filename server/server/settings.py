@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # ap
+    'FarmInfo',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# key
+APU_KEY = '4VGFO2C4IBN542V0DRAIAP7TR6UG1L'
