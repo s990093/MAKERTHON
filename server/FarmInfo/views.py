@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 import requests
 
@@ -8,7 +9,7 @@ def get_data(request):
 
     try:
         # 發送 GET 請求
-        # headers = {"Authorization": f"Bearer {}"}
+        headers = {"Authorization": f"Bearer {settings.API_KEY}"}
         response = requests.get(
             "https://data.moa.gov.tw/api/v1/TaiwanMeteorologicalStationInformationType/")
 
@@ -18,7 +19,7 @@ def get_data(request):
             return response.json()
         else:
             print(f"錯誤： {response.status_code}")
-            return None
+            return None 
     except Exception as e:
         print(f"發生例外： {e}")
         return None
