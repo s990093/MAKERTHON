@@ -2,24 +2,46 @@ from django.conf import settings
 from django.shortcuts import render
 import requests
 
+from FarmInfo.models import ControlSettings, LocalWeather, WeatherObservation
+from FarmInfo.serializers import ControlSettingsSerializer, LocalWeatherSerializer, WeatherObservationSerializer
+
+
+# rest_framework
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.renderers import JSONRenderer
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
 
+@api_view(['GET'])
 def get_data(request):
+    weatherObservationSerializer_data = WeatherObservationSerializer(
+        WeatherObservation.objects.all(), many=True)
+    localWeatherSerializer_data = LocalWeatherSerializer(
+        LocalWeather.objects.all(), many=True)
 
-    try:
-        # 發送 GET 請求
-        headers = {"Authorization": f"Bearer {settings.API_KEY}"}
-        response = requests.get(
-            "https://data.moa.gov.tw/api/v1/TaiwanMeteorologicalStationInformationType/")
+    data = {
+        "weather": weatherObservationSerializer_data.data,
+        "local": localWeatherSerializer_data.data,
+    }
 
-        # 檢查是否成功收到回應
-        if response.status_code == 200:
-            # 返回 JSON 格式的資料
-            return response.json()
-        else:
-            print(f"錯誤： {response.status_code}")
-            return None 
-    except Exception as e:
-        print(f"發生例外： {e}")
-        return None
+    return Response(data=data, status=status.HTTP_200_OK)
+
+
+class ControlSettingsAPIView(APIView):
+    def get(self, request):
+        serializer = ControlSettingsSerializer(
+            ControlSettings.objects.get(city="南投縣"))
+
+        return Response(serializer.data)
+
+    def put(self, request):
+        serializer = ControlSettingsSerializer(
+            ControlSettings, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
