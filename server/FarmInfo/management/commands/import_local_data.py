@@ -12,7 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             # 讀取本地 JSON 檔案
-            with open('./static/local_data.json', 'r') as file:
+            with open('./static/local_data_2.json', 'r') as file:
                 json_data = json.load(file)
 
             # 定義處理空字串的函數

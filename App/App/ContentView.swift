@@ -11,6 +11,12 @@ struct ContentView: View {
     var body: some View {
         TabView {
             
+            MonitoringView()
+                .tabItem {
+                    Image(systemName: "eye")
+                    Text("監控")
+                }
+          
             AnalysisView()
                 .tabItem {
                     Image(systemName: "chart.bar")
@@ -22,12 +28,6 @@ struct ContentView: View {
                     Text("設定")
                 }
 
-            MonitoringView()
-                .tabItem {
-                    Image(systemName: "eye")
-                    Text("監控")
-                }
-          
          
             
           

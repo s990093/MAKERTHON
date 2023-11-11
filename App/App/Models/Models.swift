@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 
 
@@ -29,6 +30,7 @@ struct LocalWeather: Decodable , Identifiable {
 
 struct ResponseModel: Decodable {
     var weather: [WeatherObservation]
+    var weather_2: [WeatherObservation]
     var local: [LocalWeather]
 }
 
@@ -57,3 +59,21 @@ struct Weather: Decodable , Identifiable {
     var one_year_rainfall_level: Int
     var one_year_temperature_level: Int
 }
+
+
+struct SoilComposition: Identifiable {
+    var id = UUID()
+    var name: String
+    var percentage: Double
+}
+
+struct SunlightModel: Identifiable {
+    var id = UUID()
+    var time: String
+    var irradiance: Double
+}
+
+
+
+
+

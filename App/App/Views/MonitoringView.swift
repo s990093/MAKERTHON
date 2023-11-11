@@ -3,22 +3,25 @@ import Charts
 
 struct MonitoringView: View {
     @State private var weatherData: [WeatherObservation] = []
+    @State private var weatherData_2: [WeatherObservation] = []
     @State private var localData: [LocalWeather] = []
 
     var body: some View {
         ScrollView {
             if weatherData.isEmpty && localData.isEmpty {
+                Spacer()
                 ProgressView("loading")
                     .onAppear {
                         fetchDataFromBackend()
                     }
+                Spacer()
             } else {
                 
                 Text("溫度")
                 Chart(){
                     ForEach(weatherData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.temp ?? 0),
                             series: .value("Company", "A")
                             
@@ -29,12 +32,24 @@ struct MonitoringView: View {
 
                     ForEach(localData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.temp ?? 0),
                             series: .value("Company", "南投縣")
                             
                         )
                         .foregroundStyle(by: .value("City", "南投縣"))
+
+                    }
+                    
+                    
+                    ForEach(weatherData_2) { item in
+                        LineMark(
+                            x: .value("Shape Type", item.id),
+                            y: .value("Shape Type", item.temp ?? 0),
+                            series: .value("Company", "南投縣")
+                            
+                        )
+                        .foregroundStyle(by: .value("City", "臺東縣"))
 
                     }
                 }
@@ -48,7 +63,7 @@ struct MonitoringView: View {
                 Chart(){
                     ForEach(weatherData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.humd ?? 0),
                             series: .value("Company", "A")
                             
@@ -59,7 +74,7 @@ struct MonitoringView: View {
 
                     ForEach(localData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.humd ?? 0),
                             series: .value("Company", "南投縣")
                             
@@ -67,6 +82,18 @@ struct MonitoringView: View {
                         .foregroundStyle(by: .value("City", "南投縣"))
 
                     }
+                    
+                    ForEach(weatherData_2) { item in
+                        LineMark(
+                            x: .value("Shape Type", item.id),
+                            y: .value("Shape Type", item.humd ?? 0),
+                            series: .value("Company", "南投縣")
+                            
+                        )
+                        .foregroundStyle(by: .value("City", "台東縣"))
+
+                    }
+
                 }
                 .frame(height: 300)
 
@@ -76,7 +103,7 @@ struct MonitoringView: View {
                 Chart(){
                     ForEach(weatherData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.pres ?? 0),
                             series: .value("Company", "A")
                             
@@ -87,12 +114,23 @@ struct MonitoringView: View {
 
                     ForEach(localData) { item in
                         LineMark(
-                            x: .value("Shape Type", item.time),
+                            x: .value("Shape Type", item.id),
                             y: .value("Shape Type", item.pres ?? 0),
                             series: .value("Company", "南投縣")
                             
                         )
                         .foregroundStyle(by: .value("City", "南投縣"))
+
+                    }
+                    
+                    ForEach(weatherData_2) { item in
+                        LineMark(
+                            x: .value("Shape Type", item.id),
+                            y: .value("Shape Type", item.pres ?? 0),
+                            series: .value("Company", "南投縣")
+                            
+                        )
+                        .foregroundStyle(by: .value("City", "台東縣"))
 
                     }
                 }
@@ -117,6 +155,7 @@ struct MonitoringView: View {
                     DispatchQueue.main.async {
                         // 使用解码的数据更新 weatherData 和 localData
                         self.weatherData = decodedData.weather
+                        self.weatherData_2 = decodedData.weather_2
                         self.localData = decodedData.local
                     }
                 } catch {

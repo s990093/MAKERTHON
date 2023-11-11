@@ -20,12 +20,15 @@ from rest_framework import status
 @api_view(['GET'])
 def get_data(request):
     weatherObservationSerializer_data = WeatherObservationSerializer(
-        WeatherObservation.objects.all(), many=True)
+        WeatherObservation.objects.filter(city="南投縣"), many=True)
+    weatherObservationSerializer_data_2 = WeatherObservationSerializer(
+        WeatherObservation.objects.filter(city="臺東縣"), many=True)
     localWeatherSerializer_data = LocalWeatherSerializer(
         LocalWeather.objects.all(), many=True)
 
     data = {
         "weather": weatherObservationSerializer_data.data,
+        "weather_2": weatherObservationSerializer_data_2.data,
         "local": localWeatherSerializer_data.data,
     }
 
